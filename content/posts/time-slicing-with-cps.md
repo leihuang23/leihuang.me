@@ -108,7 +108,9 @@ on the return value.
 
 The foundation of CPS is simple:
 
-**Procedures can take a callback to invoke upon their return value.**
+{{< callout >}}
+Procedures can take a callback to invoke upon their return value.
+{{< /callout >}}
 
 ## Slice it up!
 
@@ -213,4 +215,4 @@ when the current operation is completed. Relying on this feature, we first
 sliced a very big task to many small ones, and then chunked them into different
 call stacks.
 
-Check out the project [here](https://github.com/leihuang23/news-list).
+Check out the project {{< extlink href="https://github.com/leihuang23/news-list" >}}here{{< /extlink >}}.

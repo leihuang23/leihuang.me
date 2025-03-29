@@ -5,12 +5,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="index, follow">
-<title>Parabolic Curve Animation With RxJS | Lei Huang</title>
+<title>Parabolic Curve Animation With RxJS | Lei&#39;s Blog</title>
 <meta name="keywords" content="rxjs, animation">
 <meta name="description" content="Implement parabolic curve effect with Rx.js">
 <meta name="author" content="Lei Huang">
 <link rel="canonical" href="https://leihuang.me/posts/curve-animation-in-js/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.f49d66caae9ea0fd43f21f29e71a8d3e284517ed770f2aa86fa012953ad3c9ef.css" integrity="sha256-9J1myq6eoP1D8h8p5xqNPihFF&#43;13Dyqob6ASlTrTye8=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.77fc57aba3c44dbadafdb9c47b4c24d5ca6ed89e1ee4e8a384d00a41e4e67074.css" integrity="sha256-d/xXq6PETbra/bnEe0wk1cpu2J4e5OijhNAKQeTmcHQ=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://leihuang.me/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://leihuang.me/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://leihuang.me/favicon-32x32.png">
@@ -56,7 +56,7 @@
 
     </style>
 </noscript><meta property="og:url" content="https://leihuang.me/posts/curve-animation-in-js/">
-  <meta property="og:site_name" content="Lei Huang">
+  <meta property="og:site_name" content="Lei&#39;s Blog">
   <meta property="og:title" content="Parabolic Curve Animation With RxJS">
   <meta property="og:description" content="Implement parabolic curve effect with Rx.js">
   <meta property="og:locale" content="en">
@@ -101,8 +101,8 @@
   "keywords": [
     "rxjs", "animation"
   ],
-  "articleBody": "I came across this article (written in Chinese) the other day. It was about parabolic curve animation in vanilla JS. I wondered how RxJS can implement this. Below is the result of my investigation.\nImagine we take a perspective from a slow-motion camera. What humans see as a smooth animation is just an object that is put at different places at every fragment of a time period. This can be expressed as a ‘stream’ of object position. The mechanism of an animation can be simplified by somehow mapping every fragment of a time period to a position point in space. In practice, time cannot be fragmented indefinitely, what we want is an approximation of an “atomic time unit”. The browser has provided us a tool to achieve this, which is the requestAnimationFrame API.\nWe can map every timestamp emitted by requestAnimationFrame to a position coordinate at the screen. Let’s see how we can do this in Rxjs!\nGenerating time sequence // I only demonstrate the import part once, // they will be omitted in later code. import {interval, animationFrameScheduler, fromEvent, defer, merge} from 'rxjs' import {map, takeWhile, tap, flatMap} from 'rxjs/operators' function duration(ms) { return defer(() =\u003e { const start = Date.now() return interval(0, animationFrameScheduler).pipe( map(() =\u003e (Date.now() - start) / ms), takeWhile(n =\u003e n \u003c= 1) ) }) } What defer does is to only create a new observable upon being subscribed. This is to ensure every subscriber gets a new observable, otherwise, we’ll see weird movements.\nFirst, we record the animation beginning time, then we return an interval function that will emit an event every 0 seconds. This seems ridiculous. However, notice the animationFrameScheduler, it schedules at which point the interval function can emit an event. This is how we simulate an atomic time unit. The map function maps every time unit emitted by interval to a time ratio of current elapse to the whole animation duration. takeWhile ensures we unsubscribe to interval once we reach the end. We know we’ve reached the end if the current elapse equals the total time.\nThen we calculate how far the object is away from the origin at every point in time.\nMove the object const distance = d =\u003e t =\u003e d * t d is the total distance the object is going to move. t is the time ratio, which has been calculated in the last step. We multiply them and get the distance at that point.\nWe get the target in the DOM and move it.\nconst targetDiv = document.querySelector('.target') const moveRight$ = duration(1500).pipe( map(distance(1000)), tap(x =\u003e (targetDiv.style.left = x + 'px')) ) const moveDown$ = duration(900).pipe( map(distance(700)), tap(y =\u003e (targetDiv.style.top = y + 'px')) ) The first stream moves the object to the right, the second to the bottom. Notice that the animation hasn’t taken place, because we haven’t’ subscribed to them yet.\nWe combine these two streams into a new stream, making the object move rightwards and downwards at the same time.\nmerge(moveRight$, moveDown$).subscribe() This is boring, we don’t see any curve yet. But bear with me.\nMake the motion trajectory parabolic! I hope you still remember middle school math. If you don’t, fret not. It’s pretty intuitive actually. What we observe as a curve movement is the result of an object moves at different speeds in different directions. The shape of the curve can be expressed in a mathematical equation. Take a look of the graph of the equation y = x^3, the left and right half of it is the parabolic curve we want: If we can make the downward speed and rightward speed form a cubic equation, then we have a parabolic curve movement!\nWe can use two different easing functions that form a cubic relationship between them:\nThe first one is easeInQuad：\nconst easeInQuad = t =\u003e t * t The second one is easeInQuint：\nconst easeInQuint = t =\u003e Math.pow(t, 6) Then we only need to map the time ratio emitted from the interval pipeline to the result of applying these easing functions:\nconst moveDown$ = duration(900).pipe( map(easeInQuint), map(distance(700)), tap(y =\u003e (targetDiv.style.top = y + 'px')) ) const moveRight$ = duration(1500).pipe( map(easeInQuad), map(distance(1000)), tap(x =\u003e (targetDiv.style.left = x + 'px')) ) See the codepen below for the result and the complete code:\nSee the Pen{' '} Rx .js parabola animation{' '} by Lei (@leihuang) on{' '} CodePen. ",
-  "wordCount" : "726",
+  "articleBody": "I came across this article (written in Chinese) the other day. It was about parabolic curve animation in vanilla JS. I wondered how RxJS can implement this. Below is the result of my investigation.\nImagine we take a perspective from a slow-motion camera. What humans see as a smooth animation is just an object that is put at different places at every fragment of a time period. This can be expressed as a ‘stream’ of object position. The mechanism of an animation can be simplified by somehow mapping every fragment of a time period to a position point in space. In practice, time cannot be fragmented indefinitely, what we want is an approximation of an “atomic time unit”. The browser has provided us a tool to achieve this, which is the requestAnimationFrame API.\nWe can map every timestamp emitted by requestAnimationFrame to a position coordinate at the screen. Let’s see how we can do this in Rxjs!\nGenerating time sequence // I only demonstrate the import part once, // they will be omitted in later code. import { interval, animationFrameScheduler, fromEvent, defer, merge, } from \"rxjs\"; import { map, takeWhile, tap, flatMap } from \"rxjs/operators\"; function duration(ms) { return defer(() =\u003e { const start = Date.now(); return interval(0, animationFrameScheduler).pipe( map(() =\u003e (Date.now() - start) / ms), takeWhile((n) =\u003e n \u003c= 1) ); }); } What defer does is to only create a new observable upon being subscribed. This is to ensure every subscriber gets a new observable, otherwise, we’ll see weird movements.\nFirst, we record the animation beginning time, then we return an interval function that will emit an event every 0 seconds. This seems ridiculous. However, notice the animationFrameScheduler, it schedules at which point the interval function can emit an event. This is how we simulate an atomic time unit. The map function maps every time unit emitted by interval to a time ratio of current elapse to the whole animation duration. takeWhile ensures we unsubscribe to interval once we reach the end. We know we’ve reached the end if the current elapse equals the total time.\nThen we calculate how far the object is away from the origin at every point in time.\nMove the object const distance = (d) =\u003e (t) =\u003e d * t; d is the total distance the object is going to move. t is the time ratio, which has been calculated in the last step. We multiply them and get the distance at that point.\nWe get the target in the DOM and move it.\nconst targetDiv = document.querySelector(\".target\"); const moveRight$ = duration(1500).pipe( map(distance(1000)), tap((x) =\u003e (targetDiv.style.left = x + \"px\")) ); const moveDown$ = duration(900).pipe( map(distance(700)), tap((y) =\u003e (targetDiv.style.top = y + \"px\")) ); The first stream moves the object to the right, the second to the bottom. Notice that the animation hasn’t taken place, because we haven’t’ subscribed to them yet.\nWe combine these two streams into a new stream, making the object move rightwards and downwards at the same time.\nmerge(moveRight$, moveDown$).subscribe(); This is boring, we don’t see any curve yet. But bear with me.\nMake the motion trajectory parabolic! I hope you still remember middle school math. If you don’t, fret not. It’s pretty intuitive actually. What we observe as a curve movement is the result of an object moves at different speeds in different directions. The shape of the curve can be expressed in a mathematical equation. Take a look of the graph of the equation y = x^3, the left and right half of it is the parabolic curve we want: If we can make the downward speed and rightward speed form a cubic equation, then we have a parabolic curve movement!\nWe can use two different easing functions that form a cubic relationship between them:\nThe first one is easeInQuad：\nconst easeInQuad = (t) =\u003e t * t; The second one is easeInQuint：\nconst easeInQuint = (t) =\u003e Math.pow(t, 6); Then we only need to map the time ratio emitted from the interval pipeline to the result of applying these easing functions:\nconst moveDown$ = duration(900).pipe( map(easeInQuint), map(distance(700)), tap((y) =\u003e (targetDiv.style.top = y + \"px\")) ); const moveRight$ = duration(1500).pipe( map(easeInQuad), map(distance(1000)), tap((x) =\u003e (targetDiv.style.left = x + \"px\")) ); See the codepen below for the result and the complete code:\nSee the Pen{' '} Rx .js parabola animation{' '} by Lei (@leihuang) on{' '} CodePen. ",
+  "wordCount" : "730",
   "inLanguage": "en",
   "datePublished": "2018-08-02T00:00:00Z",
   "dateModified": "2018-08-02T00:00:00Z",
@@ -116,7 +116,7 @@
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Lei Huang",
+    "name": "Lei's Blog",
     "logo": {
       "@type": "ImageObject",
       "url": "https://leihuang.me/favicon.ico"
@@ -141,7 +141,7 @@
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="https://leihuang.me/" accesskey="h" title="Lei Huang (Alt + H)">Lei Huang</a>
+            <a href="https://leihuang.me/" accesskey="h" title="Lei&#39;s Blog (Alt + H)">Lei&#39;s Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -199,7 +199,27 @@
 
 </div>
   </header> 
-  <div class="post-content"><p>I came across <a href="https://juejin.im/post/5bb0b7fae51d450e62380ef3">this article (written in Chinese)</a> the other day. It was about parabolic curve animation in vanilla JS. I
+  <div class="post-content"><p>I came across 
+
+<a href="https://juejin.im/post/5bb0b7fae51d450e62380ef3" target="_blank" rel="noopener noreferrer">
+  this article (written in Chinese)
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    class="external-icon"
+  >
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+    <polyline points="15 3 21 3 21 9"></polyline>
+    <line x1="10" y1="14" x2="21" y2="3"></line>
+  </svg>
+</a> the other day. It was about parabolic curve animation in vanilla JS. I
 wondered how RxJS can implement this. Below is the result of my
 investigation.</p>
 <p>Imagine we take a perspective from a slow-motion camera. What humans see as a
@@ -215,17 +235,23 @@ coordinate at the screen. Let&rsquo;s see how we can do this in Rxjs!</p>
 <h2 id="generating-time-sequence">Generating time sequence<a hidden class="anchor" aria-hidden="true" href="#generating-time-sequence">#</a></h2>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// I only demonstrate the import part once,
 </span></span></span><span class="line"><span class="cl"><span class="c1">// they will be omitted in later code.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="p">{</span><span class="nx">interval</span><span class="p">,</span> <span class="nx">animationFrameScheduler</span><span class="p">,</span> <span class="nx">fromEvent</span><span class="p">,</span> <span class="nx">defer</span><span class="p">,</span> <span class="nx">merge</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;rxjs&#39;</span>
-</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span><span class="nx">map</span><span class="p">,</span> <span class="nx">takeWhile</span><span class="p">,</span> <span class="nx">tap</span><span class="p">,</span> <span class="nx">flatMap</span><span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;rxjs/operators&#39;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">interval</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">animationFrameScheduler</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fromEvent</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">defer</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">merge</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="nx">from</span> <span class="s2">&#34;rxjs&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">map</span><span class="p">,</span> <span class="nx">takeWhile</span><span class="p">,</span> <span class="nx">tap</span><span class="p">,</span> <span class="nx">flatMap</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&#34;rxjs/operators&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">duration</span><span class="p">(</span><span class="nx">ms</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">defer</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">start</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">start</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">interval</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">animationFrameScheduler</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">      <span class="nx">map</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">-</span> <span class="nx">start</span><span class="p">)</span> <span class="o">/</span> <span class="nx">ms</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">takeWhile</span><span class="p">(</span><span class="nx">n</span> <span class="p">=&gt;</span> <span class="nx">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">)</span>
-</span></span><span class="line"><span class="cl">  <span class="p">})</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">takeWhile</span><span class="p">((</span><span class="nx">n</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>What <code>defer</code> does is to only create a new observable upon being subscribed. This
 is to ensure every subscriber gets a new observable, otherwise, we&rsquo;ll see weird
@@ -241,28 +267,28 @@ if the current elapse equals the total time.</p>
 <p>Then we calculate how far the object is away from the origin at every point in
 time.</p>
 <h2 id="move-the-object">Move the object<a hidden class="anchor" aria-hidden="true" href="#move-the-object">#</a></h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">distance</span> <span class="o">=</span> <span class="nx">d</span> <span class="p">=&gt;</span> <span class="nx">t</span> <span class="p">=&gt;</span> <span class="nx">d</span> <span class="o">*</span> <span class="nx">t</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">distance</span> <span class="o">=</span> <span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">d</span> <span class="o">*</span> <span class="nx">t</span><span class="p">;</span>
 </span></span></code></pre></div><p><code>d</code> is the total distance the object is going to move. <code>t</code> is the time ratio,
 which has been calculated in the last step. We multiply them and get the
 distance at that point.</p>
 <p>We get the target in the DOM and move it.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">targetDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">&#39;.target&#39;</span><span class="p">)</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">targetDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&#34;.target&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">moveRight$</span> <span class="o">=</span> <span class="nx">duration</span><span class="p">(</span><span class="mi">1500</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">map</span><span class="p">(</span><span class="nx">distance</span><span class="p">(</span><span class="mi">1000</span><span class="p">)),</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">tap</span><span class="p">(</span><span class="nx">x</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="nx">targetDiv</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">tap</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="nx">targetDiv</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">+</span> <span class="s2">&#34;px&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">moveDown$</span> <span class="o">=</span> <span class="nx">duration</span><span class="p">(</span><span class="mi">900</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">map</span><span class="p">(</span><span class="nx">distance</span><span class="p">(</span><span class="mi">700</span><span class="p">)),</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">tap</span><span class="p">(</span><span class="nx">y</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="nx">targetDiv</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nx">y</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">tap</span><span class="p">((</span><span class="nx">y</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="nx">targetDiv</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nx">y</span> <span class="o">+</span> <span class="s2">&#34;px&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
 </span></span></code></pre></div><p>The first stream moves the object to the right, the second to the bottom. Notice
 that the animation hasn&rsquo;t taken place, because we haven&rsquo;t&rsquo; subscribed to them
 yet.</p>
 <p>We combine these two streams into a new stream, making the object move
 rightwards and downwards at the same time.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">merge</span><span class="p">(</span><span class="nx">moveRight$</span><span class="p">,</span> <span class="nx">moveDown$</span><span class="p">).</span><span class="nx">subscribe</span><span class="p">()</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">merge</span><span class="p">(</span><span class="nx">moveRight$</span><span class="p">,</span> <span class="nx">moveDown$</span><span class="p">).</span><span class="nx">subscribe</span><span class="p">();</span>
 </span></span></code></pre></div><p>This is boring, we don&rsquo;t see any curve yet. But bear with me.</p>
 <h2 id="make-the-motion-trajectory-parabolic">Make the motion trajectory parabolic!<a hidden class="anchor" aria-hidden="true" href="#make-the-motion-trajectory-parabolic">#</a></h2>
 <p>I hope you still remember middle school math. If you don&rsquo;t, fret not. It&rsquo;s
@@ -277,22 +303,22 @@ then we have a parabolic curve movement!</p>
 <p>We can use two different easing functions that form a cubic relationship between
 them:</p>
 <p>The first one is <code>easeInQuad</code>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">easeInQuad</span> <span class="o">=</span> <span class="nx">t</span> <span class="p">=&gt;</span> <span class="nx">t</span> <span class="o">*</span> <span class="nx">t</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">easeInQuad</span> <span class="o">=</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">t</span> <span class="o">*</span> <span class="nx">t</span><span class="p">;</span>
 </span></span></code></pre></div><p>The second one is <code>easeInQuint</code>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">easeInQuint</span> <span class="o">=</span> <span class="nx">t</span> <span class="p">=&gt;</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">easeInQuint</span> <span class="o">=</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>
 </span></span></code></pre></div><p>Then we only need to map the time ratio emitted from the interval pipeline to
 the result of applying these easing functions:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">moveDown$</span> <span class="o">=</span> <span class="nx">duration</span><span class="p">(</span><span class="mi">900</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">map</span><span class="p">(</span><span class="nx">easeInQuint</span><span class="p">),</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">map</span><span class="p">(</span><span class="nx">distance</span><span class="p">(</span><span class="mi">700</span><span class="p">)),</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">tap</span><span class="p">(</span><span class="nx">y</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="nx">targetDiv</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nx">y</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">tap</span><span class="p">((</span><span class="nx">y</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="nx">targetDiv</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nx">y</span> <span class="o">+</span> <span class="s2">&#34;px&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">moveRight$</span> <span class="o">=</span> <span class="nx">duration</span><span class="p">(</span><span class="mi">1500</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">map</span><span class="p">(</span><span class="nx">easeInQuad</span><span class="p">),</span>
 </span></span><span class="line"><span class="cl">  <span class="nx">map</span><span class="p">(</span><span class="nx">distance</span><span class="p">(</span><span class="mi">1000</span><span class="p">)),</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">tap</span><span class="p">(</span><span class="nx">x</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="nx">targetDiv</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">+</span> <span class="s1">&#39;px&#39;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">tap</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="nx">targetDiv</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">+</span> <span class="s2">&#34;px&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
 </span></span></code></pre></div><p>See the codepen below for the result and the complete code:</p>
 <iframe
   height="300"

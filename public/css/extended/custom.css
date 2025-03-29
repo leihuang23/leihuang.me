@@ -1,0 +1,24 @@
+.callout-box {
+  padding: 0.5em;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-size: 1.2em;
+  font-family: var(--font-serif);
+  font-style: italic;
+  background-color: var(--theme);
+}
+
+.callout-box::after {
+  position: absolute;
+  content: "";
+  top: 0px;
+  left: -2px;
+  bottom: 0px;
+  right: -2px;
+  background: linear-gradient(135deg, #ffbd35, #f14a16);
+  transform: skew(-3deg, -1deg);
+  z-index: -1;
+}

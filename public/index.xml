@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Lei Huang</title>
+    <title>Lei&#39;s Blog</title>
     <link>https://leihuang.me/</link>
-    <description>Recent content on Lei Huang</description>
+    <description>Recent content on Lei&#39;s Blog</description>
     <generator>Hugo -- 0.145.0</generator>
     <language>en</language>
     <copyright>2025 Lei Huang</copyright>
@@ -35,7 +35,13 @@
       <link>https://leihuang.me/posts/typewritter-in-rxjs/</link>
       <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
       <guid>https://leihuang.me/posts/typewritter-in-rxjs/</guid>
-      <description>Typewriter Effect With RxJS</description>
+      <description>&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
+&lt;p&gt;I recently rewrote my blog website from scratch in Gatsby. This time, I didn’t
+use a starter template, so I had to make a lot of design decisions. When I wrote
+the bio section on the home page, initially I put a long heading there as a
+one-sentence introduction. As I was gazing at the screen, I felt something was
+wrong. It was too wordy. But after I took out a few words, I was not satisfied
+with what was left.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Implementing A Trie In JavaScript</title>

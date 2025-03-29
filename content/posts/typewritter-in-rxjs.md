@@ -1,6 +1,5 @@
 ---
 title: "Typewriter Effect With RxJS"
-description: "Typewriter Effect With RxJS"
 date: "2020-03-30"
 tags: ['rxjs', 'animation']
 draft: false
@@ -29,7 +28,9 @@ for this role.
 
 ## Why RxJS?
 
-**RxJS enables you to encode time in values.**
+{{< callout >}}
+RxJS enables you to encode time in values.
+{{< /callout >}}
 
 As I see it, the greatest power of RxJS is that it enables you to encode time in
 values. Time becomes tangible and can be mixed and matched with other values. In

@@ -1,13 +1,13 @@
 ---
 title: "Parabolic Curve Animation With RxJS"
 date: "2018-08-02"
-tags: ['rxjs', 'animation']
+tags: ["rxjs", "animation"]
 draft: false
 description: "Implement parabolic curve effect with Rx.js"
 ShowToc: false
 ---
 
-I came across [this article (written in Chinese)](https://juejin.im/post/5bb0b7fae51d450e62380ef3) the other day. It was about parabolic curve animation in vanilla JS. I
+I came across {{< extlink href="https://juejin.im/post/5bb0b7fae51d450e62380ef3" >}}this article (written in Chinese){{< /extlink >}} the other day. It was about parabolic curve animation in vanilla JS. I
 wondered how RxJS can implement this. Below is the result of my
 investigation.
 
@@ -28,17 +28,23 @@ coordinate at the screen. Let's see how we can do this in Rxjs!
 ```javascript
 // I only demonstrate the import part once,
 // they will be omitted in later code.
-import {interval, animationFrameScheduler, fromEvent, defer, merge} from 'rxjs'
-import {map, takeWhile, tap, flatMap} from 'rxjs/operators'
+import {
+  interval,
+  animationFrameScheduler,
+  fromEvent,
+  defer,
+  merge,
+} from "rxjs";
+import { map, takeWhile, tap, flatMap } from "rxjs/operators";
 
 function duration(ms) {
   return defer(() => {
-    const start = Date.now()
+    const start = Date.now();
     return interval(0, animationFrameScheduler).pipe(
       map(() => (Date.now() - start) / ms),
-      takeWhile(n => n <= 1)
-    )
-  })
+      takeWhile((n) => n <= 1)
+    );
+  });
 }
 ```
 
@@ -61,7 +67,7 @@ time.
 ## Move the object
 
 ```js
-const distance = d => t => d * t
+const distance = (d) => (t) => d * t;
 ```
 
 `d` is the total distance the object is going to move. `t` is the time ratio,
@@ -71,17 +77,17 @@ distance at that point.
 We get the target in the DOM and move it.
 
 ```js
-const targetDiv = document.querySelector('.target')
+const targetDiv = document.querySelector(".target");
 
 const moveRight$ = duration(1500).pipe(
   map(distance(1000)),
-  tap(x => (targetDiv.style.left = x + 'px'))
-)
+  tap((x) => (targetDiv.style.left = x + "px"))
+);
 
 const moveDown$ = duration(900).pipe(
   map(distance(700)),
-  tap(y => (targetDiv.style.top = y + 'px'))
-)
+  tap((y) => (targetDiv.style.top = y + "px"))
+);
 ```
 
 The first stream moves the object to the right, the second to the bottom. Notice
@@ -92,7 +98,7 @@ We combine these two streams into a new stream, making the object move
 rightwards and downwards at the same time.
 
 ```js
-merge(moveRight$, moveDown$).subscribe()
+merge(moveRight$, moveDown$).subscribe();
 ```
 
 This is boring, we don't see any curve yet. But bear with me.
@@ -116,13 +122,13 @@ them:
 The first one is `easeInQuad`：
 
 ```js
-const easeInQuad = t => t * t
+const easeInQuad = (t) => t * t;
 ```
 
 The second one is `easeInQuint`：
 
 ```js
-const easeInQuint = t => Math.pow(t, 6)
+const easeInQuint = (t) => Math.pow(t, 6);
 ```
 
 Then we only need to map the time ratio emitted from the interval pipeline to
@@ -132,14 +138,14 @@ the result of applying these easing functions:
 const moveDown$ = duration(900).pipe(
   map(easeInQuint),
   map(distance(700)),
-  tap(y => (targetDiv.style.top = y + 'px'))
-)
+  tap((y) => (targetDiv.style.top = y + "px"))
+);
 
 const moveRight$ = duration(1500).pipe(
   map(easeInQuad),
   map(distance(1000)),
-  tap(x => (targetDiv.style.left = x + 'px'))
-)
+  tap((x) => (targetDiv.style.left = x + "px"))
+);
 ```
 
 See the codepen below for the result and the complete code:

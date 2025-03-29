@@ -6,7 +6,7 @@ draft: false
 ShowToc: false
 ---
 
-I wrote about [time-slicing with CPS technique](/blog/time-slicing-with-cps/) in the last blog post. The solution I proposed has two drawbacks:
+I wrote about [time-slicing with CPS technique](/posts/time-slicing-with-cps/) in the last blog post. The solution I proposed has two drawbacks:
 
 1. The control over task scheduling is too weak. Task slicing relies entirely on hacking the JavaScript engine's event loop, and it's impossible to arbitrarily pause and resume. This makes it impossible to precisely time the slices; you can only set them based on subjective experience (the example I provided uses 500 as the interval). However, 500 tasks might still be too long, causing the main thread to be blocked for too long. Or it might be too short, not fully utilizing the current call stack.
 2. `setTimeout`'s timing is inaccurate, and the actual time interval will have deviations. The result is that the delays of each task accumulate, significantly increasing the total task completion time.
