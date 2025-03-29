@@ -14,7 +14,7 @@
       <link>https://leihuang.me/posts/category-mapping-with-embedding/</link>
       <pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate>
       <guid>https://leihuang.me/posts/category-mapping-with-embedding/</guid>
-      <description>A deep dive into how I used embeddings and LLMs to automate a complex product categorization migration, cleaning up messy data along the way.</description>
+      <description>A deep dive into how I used embeddings and LLMs to automate a complex product categorization migration.</description>
     </item>
     <item>
       <title>Time-slicing With Coroutine</title>

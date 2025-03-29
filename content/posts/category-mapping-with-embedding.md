@@ -1,6 +1,6 @@
 ---
 title: "Category Mapping with Embedding"
-description: "A deep dive into how I used embeddings and LLMs to automate a complex product categorization migration, cleaning up messy data along the way."
+description: "A deep dive into how I used embeddings and LLMs to automate a complex product categorization migration."
 date: "2023-07-01"
 draft: false
 ---
