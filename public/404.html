@@ -10,7 +10,7 @@
 <meta name="description" content="Lei Huang - Personal Blog of Lei Huang">
 <meta name="author" content="Lei Huang">
 <link rel="canonical" href="https://leihuang.me/404.html">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.77fc57aba3c44dbadafdb9c47b4c24d5ca6ed89e1ee4e8a384d00a41e4e67074.css" integrity="sha256-d/xXq6PETbra/bnEe0wk1cpu2J4e5OijhNAKQeTmcHQ=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.11809663be6daae2e0b30f83999b4b36a80598c66f64d9bfcc2ca5cc95a31bef.css" integrity="sha256-EYCWY75tquLgsw&#43;DmZtLNqgFmMZvZNm/zCylzJWjG&#43;8=" rel="preload stylesheet" as="style">
 <link rel="icon" href="https://leihuang.me/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="https://leihuang.me/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="https://leihuang.me/favicon-32x32.png">
@@ -126,7 +126,70 @@
     </nav>
 </header>
 <main class="main">
-<div class="not-found">404</div>
+<main>
+  <svg viewBox="0 0 800 200" class="funky-404">
+    <text
+      x="50%"
+      y="50%"
+      text-anchor="middle"
+      dominant-baseline="middle"
+      class="funky-text"
+    >
+      404
+    </text>
+    <style>
+      .funky-404 {
+        width: 100%;
+        height: auto;
+        margin: 1rem 0;
+      }
+      .funky-text {
+        font-size: 140px;
+        font-weight: bold;
+        fill: transparent;
+        stroke: var(--color-link);
+        stroke-width: 4px;
+        animation: pulse 2s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        50% {
+          stroke-width: 4px;
+          stroke-dasharray: 10;
+        }
+      }
+    </style>
+  </svg>
+  <p>I haven't written this article yet. Will you help me write it?</p>
+  <iframe
+    class="responsive-iframe"
+    style="aspect-ratio: 16/9"
+    width="100%"
+    src="https://www.youtube-nocookie.com/embed/6IJB0aD8gSA?si=KG0aGzmKo6CSd0Uy"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen
+  ></iframe>
+  <p>
+    <a href="/">Go home.</a>
+  </p>
+</main>
+<style>
+  p {
+    line-height: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  a {
+    color: var(--color-link);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
     </main>
     
 <footer class="footer">

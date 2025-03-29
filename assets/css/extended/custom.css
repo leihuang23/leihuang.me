@@ -1,5 +1,6 @@
 :root {
   --font-serif: 'Georgia', 'Times New Roman', Times, serif;
+  --color-link: rgb(76, 175, 80);
 }
 
 .callout-box {
