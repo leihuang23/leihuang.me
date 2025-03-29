@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Lei Huang</title>
+    <link>https://leihuang.me/</link>
+    <description>Recent content on Lei Huang</description>
+    <generator>Hugo -- 0.145.0</generator>
+    <language>en</language>
+    <copyright>2025 Lei Huang</copyright>
+    <lastBuildDate>Sat, 01 Jul 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://leihuang.me/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Category Mapping with Embedding</title>
+      <link>https://leihuang.me/posts/category-mapping-with-embedding/</link>
+      <pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate>
+      <guid>https://leihuang.me/posts/category-mapping-with-embedding/</guid>
+      <description>A deep dive into how I used embeddings and LLMs to automate a complex product categorization migration, cleaning up messy data along the way.</description>
+    </item>
+    <item>
+      <title>Time-slicing With Coroutine</title>
+      <link>https://leihuang.me/posts/time-slicing-with-coroutine/</link>
+      <pubDate>Sat, 15 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://leihuang.me/posts/time-slicing-with-coroutine/</guid>
+      <description>Improving time-slicing with coroutine and JavaScript generators</description>
+    </item>
+    <item>
+      <title>Time-slicing With Continuation-passing Style</title>
+      <link>https://leihuang.me/posts/time-slicing-with-cps/</link>
+      <pubDate>Thu, 06 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://leihuang.me/posts/time-slicing-with-cps/</guid>
+      <description>Time-slicing With Continuation-passing Style to handle performance bottleneck</description>
+    </item>
+    <item>
+      <title>Typewriter Effect With RxJS</title>
+      <link>https://leihuang.me/posts/typewritter-in-rxjs/</link>
+      <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>https://leihuang.me/posts/typewritter-in-rxjs/</guid>
+      <description>Typewriter Effect With RxJS</description>
+    </item>
+    <item>
+      <title>Implementing A Trie In JavaScript</title>
+      <link>https://leihuang.me/posts/implementing-tri/</link>
+      <pubDate>Sat, 04 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://leihuang.me/posts/implementing-tri/</guid>
+      <description>A step by step guide to implement a Trie in JavaScript</description>
+    </item>
+    <item>
+      <title>Introduction to Lenses in JavaScript</title>
+      <link>https://leihuang.me/posts/lens-in-js/</link>
+      <pubDate>Thu, 17 Jan 2019 00:00:00 +0000</pubDate>
+      <guid>https://leihuang.me/posts/lens-in-js/</guid>
+      <description>This article aims to teach you how to implement lenses in vanilla JavaScript. You&amp;#39;ll appreciate the expressiveness of functional programming.</description>
+    </item>
+    <item>
+      <title>Parabolic Curve Animation With RxJS</title>
+      <link>https://leihuang.me/posts/curve-animation-in-js/</link>
+      <pubDate>Thu, 02 Aug 2018 00:00:00 +0000</pubDate>
+      <guid>https://leihuang.me/posts/curve-animation-in-js/</guid>
+      <description>Implement parabolic curve effect with Rx.js</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Tags on Lei Huang</title>
+    <link>https://leihuang.me/tags/</link>
+    <description>Recent content in Tags on Lei Huang</description>
+    <generator>Hugo -- 0.145.0</generator>
+    <language>en</language>
+    <copyright>2025 Lei Huang</copyright>
+    <lastBuildDate>Thu, 06 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://leihuang.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CPS</title>
+      <link>https://leihuang.me/tags/cps/</link>
+      <pubDate>Thu, 06 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://leihuang.me/tags/cps/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Non-Blocking</title>
+      <link>https://leihuang.me/tags/non-blocking/</link>
+      <pubDate>Thu, 06 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://leihuang.me/tags/non-blocking/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Animation</title>
+      <link>https://leihuang.me/tags/animation/</link>
+      <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>https://leihuang.me/tags/animation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Rxjs</title>
+      <link>https://leihuang.me/tags/rxjs/</link>
+      <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>https://leihuang.me/tags/rxjs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Data Structure</title>
+      <link>https://leihuang.me/tags/data-structure/</link>
+      <pubDate>Sat, 04 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://leihuang.me/tags/data-structure/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Trie</title>
+      <link>https://leihuang.me/tags/trie/</link>
+      <pubDate>Sat, 04 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://leihuang.me/tags/trie/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Fp</title>
+      <link>https://leihuang.me/tags/fp/</link>
+      <pubDate>Thu, 17 Jan 2019 00:00:00 +0000</pubDate>
+      <guid>https://leihuang.me/tags/fp/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Lens</title>
+      <link>https://leihuang.me/tags/lens/</link>
+      <pubDate>Thu, 17 Jan 2019 00:00:00 +0000</pubDate>
+      <guid>https://leihuang.me/tags/lens/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

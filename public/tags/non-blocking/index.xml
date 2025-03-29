@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Non-Blocking on Lei Huang</title>
+    <link>https://leihuang.me/tags/non-blocking/</link>
+    <description>Recent content in Non-Blocking on Lei Huang</description>
+    <generator>Hugo -- 0.145.0</generator>
+    <language>en</language>
+    <copyright>2025 Lei Huang</copyright>
+    <lastBuildDate>Thu, 06 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://leihuang.me/tags/non-blocking/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Time-slicing With Continuation-passing Style</title>
+      <link>https://leihuang.me/posts/time-slicing-with-cps/</link>
+      <pubDate>Thu, 06 Aug 2020 00:00:00 +0000</pubDate>
+      <guid>https://leihuang.me/posts/time-slicing-with-cps/</guid>
+      <description>Time-slicing With Continuation-passing Style to handle performance bottleneck</description>
+    </item>
+  </channel>
+</rss>
