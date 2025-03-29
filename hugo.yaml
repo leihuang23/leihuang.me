@@ -102,6 +102,15 @@ params:
     - name: bluesky
       title: Find me on Bluesky
       url: "https://bsky.app/profile/leihuang.me"
+    - name: strava
+      title: Find me on Strava
+      url: "https://www.strava.com/athletes/109784228"
+    # - name: signal
+    #   title: Find me on Signal
+    #   url: "https://leihuang.me/signal"
+    - name: notes
+      title: My Notes
+      url: "https://notes.leihuang.me"
     - name: email
       title: "Write to me"
       url: "mailto:lei@tuta.com"

@@ -1,0 +1,11 @@
+[[redirects]]
+  from = "https://leihuang.me/signal"
+  to = "https://signal.me/#eu/oXZQaXu66rdaYOlC4gcizLOqQCE-YBjqQ6iKZwt3L7RxnaepE0FDBJ6BhKDgu62N"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = '/linkedin'
+  to = 'https://www.linkedin.com/in/leihuang-eu/'
+  status = 301
+  force = true
