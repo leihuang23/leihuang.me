@@ -102,6 +102,9 @@ params:
     - name: bluesky
       title: Find me on Bluesky
       url: "https://bsky.app/profile/lei.moi"
+    - name: email
+      title: "Write to me"
+      url: "mailto:lei@tuta.com"
 
   # editPost:
   #   URL: "https://github.com/adityatelange/hugo-PaperMod/tree/exampleSite/content"
