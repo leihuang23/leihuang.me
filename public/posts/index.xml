@@ -62,7 +62,37 @@ with what was left.&lt;/p&gt;</description>
       <link>https://leihuang.me/posts/curve-animation-in-js/</link>
       <pubDate>Thu, 02 Aug 2018 00:00:00 +0000</pubDate>
       <guid>https://leihuang.me/posts/curve-animation-in-js/</guid>
-      <description>Implement parabolic curve effect with Rx.js</description>
+      <description>&lt;p&gt;I came across 
+
+&lt;a href=&#34;https://juejin.im/post/5bb0b7fae51d450e62380ef3&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;
+   this article (written in Chinese)
+  &lt;svg
+    xmlns=&#34;http://www.w3.org/2000/svg&#34;
+    width=&#34;16&#34;
+    height=&#34;16&#34;
+    viewBox=&#34;0 0 24 24&#34;
+    fill=&#34;none&#34;
+    stroke=&#34;currentColor&#34;
+    stroke-width=&#34;2&#34;
+    stroke-linecap=&#34;round&#34;
+    stroke-linejoin=&#34;round&#34;
+    class=&#34;external-icon&#34;
+  &gt;
+    &lt;path d=&#34;M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6&#34;&gt;&lt;/path&gt;
+    &lt;polyline points=&#34;15 3 21 3 21 9&#34;&gt;&lt;/polyline&gt;
+    &lt;line x1=&#34;10&#34; y1=&#34;14&#34; x2=&#34;21&#34; y2=&#34;3&#34;&gt;&lt;/line&gt;
+  &lt;/svg&gt;
+&lt;/a&gt; the other day. It was about parabolic curve animation in vanilla JS. I
+wondered how RxJS can implement this. Below is the result of my
+investigation.&lt;/p&gt;
+&lt;p&gt;Imagine we take a perspective from a slow-motion camera. What humans see as a
+smooth animation is just an object that is put at different places at every
+fragment of a time period. This can be expressed as a &amp;lsquo;stream&amp;rsquo; of object
+position. The mechanism of an animation can be simplified by somehow mapping
+every fragment of a time period to a position point in space. In practice, time
+cannot be fragmented indefinitely, what we want is an approximation of an
+&amp;ldquo;atomic time unit&amp;rdquo;. The browser has provided us a tool to achieve this, which is
+the &lt;code&gt;requestAnimationFrame&lt;/code&gt; API.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

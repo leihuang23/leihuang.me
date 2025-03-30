@@ -3,11 +3,10 @@ title: "Parabolic Curve Animation With RxJS"
 date: "2018-08-02"
 tags: ["rxjs", "animation"]
 draft: false
-description: "Implement parabolic curve effect with Rx.js"
 ShowToc: false
 ---
 
-I came across {{< extlink href="https://juejin.im/post/5bb0b7fae51d450e62380ef3" >}}this article (written in Chinese){{< /extlink >}} the other day. It was about parabolic curve animation in vanilla JS. I
+I came across {{< extlink href="https://juejin.im/post/5bb0b7fae51d450e62380ef3" >}} this article (written in Chinese){{< /extlink >}} the other day. It was about parabolic curve animation in vanilla JS. I
 wondered how RxJS can implement this. Below is the result of my
 investigation.
 

@@ -7,7 +7,26 @@
 <meta name="robots" content="index, follow">
 <title>Parabolic Curve Animation With RxJS | Lei&#39;s Blog</title>
 <meta name="keywords" content="rxjs, animation">
-<meta name="description" content="Implement parabolic curve effect with Rx.js">
+<meta name="description" content="I came across 
+
+
+   this article (written in Chinese)
+  
+    
+    
+    
+  
+ the other day. It was about parabolic curve animation in vanilla JS. I
+wondered how RxJS can implement this. Below is the result of my
+investigation.
+Imagine we take a perspective from a slow-motion camera. What humans see as a
+smooth animation is just an object that is put at different places at every
+fragment of a time period. This can be expressed as a &lsquo;stream&rsquo; of object
+position. The mechanism of an animation can be simplified by somehow mapping
+every fragment of a time period to a position point in space. In practice, time
+cannot be fragmented indefinitely, what we want is an approximation of an
+&ldquo;atomic time unit&rdquo;. The browser has provided us a tool to achieve this, which is
+the requestAnimationFrame API.">
 <meta name="author" content="Lei Huang">
 <link rel="canonical" href="https://leihuang.me/posts/curve-animation-in-js/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.11809663be6daae2e0b30f83999b4b36a80598c66f64d9bfcc2ca5cc95a31bef.css" integrity="sha256-EYCWY75tquLgsw&#43;DmZtLNqgFmMZvZNm/zCylzJWjG&#43;8=" rel="preload stylesheet" as="style">
@@ -58,7 +77,8 @@
 </noscript><meta property="og:url" content="https://leihuang.me/posts/curve-animation-in-js/">
   <meta property="og:site_name" content="Lei&#39;s Blog">
   <meta property="og:title" content="Parabolic Curve Animation With RxJS">
-  <meta property="og:description" content="Implement parabolic curve effect with Rx.js">
+  <meta property="og:description" content="I came across this article (written in Chinese) the other day. It was about parabolic curve animation in vanilla JS. I wondered how RxJS can implement this. Below is the result of my investigation.
+Imagine we take a perspective from a slow-motion camera. What humans see as a smooth animation is just an object that is put at different places at every fragment of a time period. This can be expressed as a ‘stream’ of object position. The mechanism of an animation can be simplified by somehow mapping every fragment of a time period to a position point in space. In practice, time cannot be fragmented indefinitely, what we want is an approximation of an “atomic time unit”. The browser has provided us a tool to achieve this, which is the requestAnimationFrame API.">
   <meta property="og:locale" content="en">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -68,7 +88,26 @@
     <meta property="article:tag" content="Animation">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Parabolic Curve Animation With RxJS">
-<meta name="twitter:description" content="Implement parabolic curve effect with Rx.js">
+<meta name="twitter:description" content="I came across 
+
+
+   this article (written in Chinese)
+  
+    
+    
+    
+  
+ the other day. It was about parabolic curve animation in vanilla JS. I
+wondered how RxJS can implement this. Below is the result of my
+investigation.
+Imagine we take a perspective from a slow-motion camera. What humans see as a
+smooth animation is just an object that is put at different places at every
+fragment of a time period. This can be expressed as a &lsquo;stream&rsquo; of object
+position. The mechanism of an animation can be simplified by somehow mapping
+every fragment of a time period to a position point in space. In practice, time
+cannot be fragmented indefinitely, what we want is an approximation of an
+&ldquo;atomic time unit&rdquo;. The browser has provided us a tool to achieve this, which is
+the requestAnimationFrame API.">
 
 
 <script type="application/ld+json">
@@ -97,7 +136,7 @@
   "@type": "BlogPosting",
   "headline": "Parabolic Curve Animation With RxJS",
   "name": "Parabolic Curve Animation With RxJS",
-  "description": "Implement parabolic curve effect with Rx.js",
+  "description": "I came across this article (written in Chinese) the other day. It was about parabolic curve animation in vanilla JS. I wondered how RxJS can implement this. Below is the result of my investigation.\nImagine we take a perspective from a slow-motion camera. What humans see as a smooth animation is just an object that is put at different places at every fragment of a time period. This can be expressed as a \u0026lsquo;stream\u0026rsquo; of object position. The mechanism of an animation can be simplified by somehow mapping every fragment of a time period to a position point in space. In practice, time cannot be fragmented indefinitely, what we want is an approximation of an \u0026ldquo;atomic time unit\u0026rdquo;. The browser has provided us a tool to achieve this, which is the requestAnimationFrame API.\n",
   "keywords": [
     "rxjs", "animation"
   ],
@@ -192,9 +231,6 @@
     <h1 class="post-title entry-hint-parent">
       Parabolic Curve Animation With RxJS
     </h1>
-    <div class="post-description">
-      Implement parabolic curve effect with Rx.js
-    </div>
     <div class="post-meta"><span title='2018-08-02 00:00:00 +0000 UTC'>August 2, 2018</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Lei Huang
 
 </div>
@@ -202,7 +238,7 @@
   <div class="post-content"><p>I came across 
 
 <a href="https://juejin.im/post/5bb0b7fae51d450e62380ef3" target="_blank" rel="noopener noreferrer">
-  this article (written in Chinese)
+   this article (written in Chinese)
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="16"
