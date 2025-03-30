@@ -162,7 +162,7 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>III was reviewing my old notebook and came across a piece of code that I took from somewhere many years ago. I asked Claude 3.7 Sonnet about this code, and here’s the conversation:
+    <p>I was reviewing my old notebook and came across a piece of code that I took from somewhere many years ago. I asked Claude 3.7 Sonnet about this code, and here’s the conversation:
 Lei: Take a look at the following code:
 let timeout = null; const queue = new Set(); function process() { for (const task of queue) { task(); } queue.clear(); timeout = null; } function enqueue(task) { if (timeout === null) timeout = setTimeout(process, 0); queue.add(task); } I’m not sure how is this code useful. One scenario I can think of is modifying the DOM. Doing DOM manipulation in one batch might avoid reflow. But I’m fuzzy on details. Can you give me a concrete example?
 ...</p>
