@@ -7,8 +7,22 @@
     <generator>Hugo -- 0.145.0</generator>
     <language>en</language>
     <copyright>2025 Lei Huang</copyright>
-    <lastBuildDate>Thu, 06 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 30 Mar 2025 15:11:05 +0200</lastBuildDate>
     <atom:link href="https://leihuang.me/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Batching</title>
+      <link>https://leihuang.me/tags/batching/</link>
+      <pubDate>Sun, 30 Mar 2025 15:11:05 +0200</pubDate>
+      <guid>https://leihuang.me/tags/batching/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>LLM</title>
+      <link>https://leihuang.me/tags/llm/</link>
+      <pubDate>Sun, 30 Mar 2025 15:11:05 +0200</pubDate>
+      <guid>https://leihuang.me/tags/llm/</guid>
+      <description></description>
+    </item>
     <item>
       <title>CPS</title>
       <link>https://leihuang.me/tags/cps/</link>

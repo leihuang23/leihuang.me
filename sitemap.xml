@@ -2,13 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://leihuang.me/posts/category-mapping-with-embedding/</loc>
-    <lastmod>2023-07-01T00:00:00+00:00</lastmod>
+    <loc>https://leihuang.me/tags/batching/</loc>
+    <lastmod>2025-03-30T15:11:05+02:00</lastmod>
+  </url><url>
+    <loc>https://leihuang.me/posts/learn-batching-from-llm/</loc>
+    <lastmod>2025-03-30T15:11:05+02:00</lastmod>
   </url><url>
     <loc>https://leihuang.me/</loc>
-    <lastmod>2023-07-01T00:00:00+00:00</lastmod>
+    <lastmod>2025-03-30T15:11:05+02:00</lastmod>
+  </url><url>
+    <loc>https://leihuang.me/tags/llm/</loc>
+    <lastmod>2025-03-30T15:11:05+02:00</lastmod>
   </url><url>
     <loc>https://leihuang.me/posts/</loc>
+    <lastmod>2025-03-30T15:11:05+02:00</lastmod>
+  </url><url>
+    <loc>https://leihuang.me/tags/</loc>
+    <lastmod>2025-03-30T15:11:05+02:00</lastmod>
+  </url><url>
+    <loc>https://leihuang.me/posts/category-mapping-with-embedding/</loc>
     <lastmod>2023-07-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://leihuang.me/posts/time-slicing-with-coroutine/</loc>
@@ -18,9 +30,6 @@
     <lastmod>2020-08-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://leihuang.me/tags/non-blocking/</loc>
-    <lastmod>2020-08-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://leihuang.me/tags/</loc>
     <lastmod>2020-08-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://leihuang.me/posts/time-slicing-with-cps/</loc>

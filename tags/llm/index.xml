@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Lei&#39;s Blog</title>
-    <link>https://leihuang.me/</link>
-    <description>Recent content on Lei&#39;s Blog</description>
+    <title>LLM on Lei&#39;s Blog</title>
+    <link>https://leihuang.me/tags/llm/</link>
+    <description>Recent content in LLM on Lei&#39;s Blog</description>
     <generator>Hugo -- 0.145.0</generator>
     <language>en</language>
     <copyright>2025 Lei Huang</copyright>
     <lastBuildDate>Sun, 30 Mar 2025 15:11:05 +0200</lastBuildDate>
-    <atom:link href="https://leihuang.me/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://leihuang.me/tags/llm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Learn Batching From LLM</title>
       <link>https://leihuang.me/posts/learn-batching-from-llm/</link>
@@ -36,91 +36,6 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nx&#34;&gt;queue&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;add&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;task&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I&amp;rsquo;m not sure how is this code useful. One scenario I can think of is modifying the DOM. Doing DOM manipulation in one batch might avoid reflow. But I&amp;rsquo;m fuzzy on details. Can you give me a concrete example?&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Category Mapping with Embedding</title>
-      <link>https://leihuang.me/posts/category-mapping-with-embedding/</link>
-      <pubDate>Sat, 01 Jul 2023 00:00:00 +0000</pubDate>
-      <guid>https://leihuang.me/posts/category-mapping-with-embedding/</guid>
-      <description>A deep dive into how I used embeddings and LLMs to automate a complex product categorization migration.</description>
-    </item>
-    <item>
-      <title>Time-slicing With Coroutine</title>
-      <link>https://leihuang.me/posts/time-slicing-with-coroutine/</link>
-      <pubDate>Sat, 15 Aug 2020 00:00:00 +0000</pubDate>
-      <guid>https://leihuang.me/posts/time-slicing-with-coroutine/</guid>
-      <description>Improving time-slicing with coroutine and JavaScript generators</description>
-    </item>
-    <item>
-      <title>Time-slicing With Continuation-passing Style</title>
-      <link>https://leihuang.me/posts/time-slicing-with-cps/</link>
-      <pubDate>Thu, 06 Aug 2020 00:00:00 +0000</pubDate>
-      <guid>https://leihuang.me/posts/time-slicing-with-cps/</guid>
-      <description>Time-slicing With Continuation-passing Style to handle performance bottleneck</description>
-    </item>
-    <item>
-      <title>Typewriter Effect With RxJS</title>
-      <link>https://leihuang.me/posts/typewritter-in-rxjs/</link>
-      <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>https://leihuang.me/posts/typewritter-in-rxjs/</guid>
-      <description>&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
-&lt;p&gt;I recently rewrote my blog website from scratch in Gatsby. This time, I didn’t
-use a starter template, so I had to make a lot of design decisions. When I wrote
-the bio section on the home page, initially I put a long heading there as a
-one-sentence introduction. As I was gazing at the screen, I felt something was
-wrong. It was too wordy. But after I took out a few words, I was not satisfied
-with what was left.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>Implementing A Trie In JavaScript</title>
-      <link>https://leihuang.me/posts/implementing-tri/</link>
-      <pubDate>Sat, 04 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://leihuang.me/posts/implementing-tri/</guid>
-      <description>A step by step guide to implement a Trie in JavaScript</description>
-    </item>
-    <item>
-      <title>Introduction to Lenses in JavaScript</title>
-      <link>https://leihuang.me/posts/lens-in-js/</link>
-      <pubDate>Thu, 17 Jan 2019 00:00:00 +0000</pubDate>
-      <guid>https://leihuang.me/posts/lens-in-js/</guid>
-      <description>This article aims to teach you how to implement lenses in vanilla JavaScript. You&amp;#39;ll appreciate the expressiveness of functional programming.</description>
-    </item>
-    <item>
-      <title>Parabolic Curve Animation With RxJS</title>
-      <link>https://leihuang.me/posts/curve-animation-in-js/</link>
-      <pubDate>Thu, 02 Aug 2018 00:00:00 +0000</pubDate>
-      <guid>https://leihuang.me/posts/curve-animation-in-js/</guid>
-      <description>&lt;p&gt;I came across 
-
-&lt;a href=&#34;https://juejin.im/post/5bb0b7fae51d450e62380ef3&#34; target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;
-   this article (written in Chinese)
-  &lt;svg
-    xmlns=&#34;http://www.w3.org/2000/svg&#34;
-    width=&#34;16&#34;
-    height=&#34;16&#34;
-    viewBox=&#34;0 0 24 24&#34;
-    fill=&#34;none&#34;
-    stroke=&#34;currentColor&#34;
-    stroke-width=&#34;2&#34;
-    stroke-linecap=&#34;round&#34;
-    stroke-linejoin=&#34;round&#34;
-    class=&#34;external-icon&#34;
-  &gt;
-    &lt;path d=&#34;M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6&#34;&gt;&lt;/path&gt;
-    &lt;polyline points=&#34;15 3 21 3 21 9&#34;&gt;&lt;/polyline&gt;
-    &lt;line x1=&#34;10&#34; y1=&#34;14&#34; x2=&#34;21&#34; y2=&#34;3&#34;&gt;&lt;/line&gt;
-  &lt;/svg&gt;
-&lt;/a&gt; the other day. It was about parabolic curve animation in vanilla JS. I
-wondered how RxJS can implement this. Below is the result of my
-investigation.&lt;/p&gt;
-&lt;p&gt;Imagine we take a perspective from a slow-motion camera. What humans see as a
-smooth animation is just an object that is put at different places at every
-fragment of a time period. This can be expressed as a &amp;lsquo;stream&amp;rsquo; of object
-position. The mechanism of an animation can be simplified by somehow mapping
-every fragment of a time period to a position point in space. In practice, time
-cannot be fragmented indefinitely, what we want is an approximation of an
-&amp;ldquo;atomic time unit&amp;rdquo;. The browser has provided us a tool to achieve this, which is
-the &lt;code&gt;requestAnimationFrame&lt;/code&gt; API.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
