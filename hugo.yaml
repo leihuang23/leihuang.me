@@ -102,21 +102,21 @@ params:
     - name: bluesky
       title: Find me on Bluesky
       url: "https://bsky.app/profile/leihuang.me"
-    - name: komoot
-      title: Find me on Komoot
-      url: "https://www.komoot.com/user/3160098212827"
-    # - name: strava
-    #   title: Find me on Strava
-    #   url: "https://www.strava.com/athletes/109784228"
+    # - name: komoot
+    #   title: Find me on Komoot
+    #   url: "https://www.komoot.com/user/3160098212827"
+    - name: strava
+      title: Find me on Strava
+      url: "https://www.strava.com/athletes/109784228"
     # - name: signal
     #   title: Find me on Signal
     #   url: "https://leihuang.me/signal"
     - name: notes
       title: My Notes
       url: "https://notes.leihuang.me"
-    - name: email
-      title: "Write to me"
-      url: "mailto:lei@tuta.com"
+    # - name: email
+    #   title: "Write to me"
+    #   url: "mailto:lei@tuta.com"
 
   # editPost:
   #   URL: "https://github.com/adityatelange/hugo-PaperMod/tree/exampleSite/content"
