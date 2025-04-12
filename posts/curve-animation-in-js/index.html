@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en" dir="auto">
-
-<head><meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="index, follow">
-<title>Parabolic Curve Animation With RxJS | Lei&#39;s Blog</title>
-<meta name="keywords" content="rxjs, animation">
-<meta name="description" content="I came across 
+<!doctype html><html lang=en dir=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Parabolic Curve Animation With RxJS | Lei's Blog</title>
+<meta name=keywords content="rxjs,animation"><meta name=description content="I came across 
 
 
    this article (written in Chinese)
@@ -26,69 +18,8 @@ position. The mechanism of an animation can be simplified by somehow mapping
 every fragment of a time period to a position point in space. In practice, time
 cannot be fragmented indefinitely, what we want is an approximation of an
 &ldquo;atomic time unit&rdquo;. The browser has provided us a tool to achieve this, which is
-the requestAnimationFrame API.">
-<meta name="author" content="Lei Huang">
-<link rel="canonical" href="https://leihuang.me/posts/curve-animation-in-js/">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.db0b65b7349d5fa7f023edb7ef5bca5eb5808a2d8fd960402384d3ea072cd12c.css" integrity="sha256-2wtltzSdX6fwI&#43;2371vKXrWAii2P2WBAI4TT6gcs0Sw=" rel="preload stylesheet" as="style">
-<link rel="icon" href="https://leihuang.me/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="https://leihuang.me/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://leihuang.me/favicon-32x32.png">
-<link rel="apple-touch-icon" href="https://leihuang.me/apple-touch-icon.png">
-<link rel="mask-icon" href="https://leihuang.me/safari-pinned-tab.svg">
-<meta name="theme-color" content="#2e2e33">
-<meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="https://leihuang.me/posts/curve-animation-in-js/">
-<noscript>
-    <style>
-        #theme-toggle,
-        .top-link {
-            display: none;
-        }
-
-    </style>
-    <style>
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --theme: rgb(29, 30, 32);
-                --entry: rgb(46, 46, 51);
-                --primary: rgb(218, 218, 219);
-                --secondary: rgb(155, 156, 157);
-                --tertiary: rgb(65, 66, 68);
-                --content: rgb(196, 196, 197);
-                --code-block-bg: rgb(46, 46, 51);
-                --code-bg: rgb(55, 56, 62);
-                --border: rgb(51, 51, 51);
-            }
-
-            .list {
-                background: var(--theme);
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-track {
-                background: 0 0;
-            }
-
-            .list:not(.dark)::-webkit-scrollbar-thumb {
-                border-color: var(--theme);
-            }
-        }
-
-    </style>
-</noscript><meta property="og:url" content="https://leihuang.me/posts/curve-animation-in-js/">
-  <meta property="og:site_name" content="Lei&#39;s Blog">
-  <meta property="og:title" content="Parabolic Curve Animation With RxJS">
-  <meta property="og:description" content="I came across this article (written in Chinese) the other day. It was about parabolic curve animation in vanilla JS. I wondered how RxJS can implement this. Below is the result of my investigation.
-Imagine we take a perspective from a slow-motion camera. What humans see as a smooth animation is just an object that is put at different places at every fragment of a time period. This can be expressed as a ‘stream’ of object position. The mechanism of an animation can be simplified by somehow mapping every fragment of a time period to a position point in space. In practice, time cannot be fragmented indefinitely, what we want is an approximation of an “atomic time unit”. The browser has provided us a tool to achieve this, which is the requestAnimationFrame API.">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2018-08-02T00:00:00+00:00">
-    <meta property="article:modified_time" content="2018-08-02T00:00:00+00:00">
-    <meta property="article:tag" content="Rxjs">
-    <meta property="article:tag" content="Animation">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Parabolic Curve Animation With RxJS">
-<meta name="twitter:description" content="I came across 
+the requestAnimationFrame API."><meta name=author content="Lei Huang"><link rel=canonical href=https://leihuang.me/posts/curve-animation-in-js/><link crossorigin=anonymous href=/assets/css/stylesheet.db0b65b7349d5fa7f023edb7ef5bca5eb5808a2d8fd960402384d3ea072cd12c.css integrity="sha256-2wtltzSdX6fwI+2371vKXrWAii2P2WBAI4TT6gcs0Sw=" rel="preload stylesheet" as=style><link rel=icon href=https://leihuang.me/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://leihuang.me/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://leihuang.me/favicon-32x32.png><link rel=apple-touch-icon href=https://leihuang.me/apple-touch-icon.png><link rel=mask-icon href=https://leihuang.me/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=en href=https://leihuang.me/posts/curve-animation-in-js/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><meta property="og:url" content="https://leihuang.me/posts/curve-animation-in-js/"><meta property="og:site_name" content="Lei's Blog"><meta property="og:title" content="Parabolic Curve Animation With RxJS"><meta property="og:description" content="I came across this article (written in Chinese) the other day. It was about parabolic curve animation in vanilla JS. I wondered how RxJS can implement this. Below is the result of my investigation.
+Imagine we take a perspective from a slow-motion camera. What humans see as a smooth animation is just an object that is put at different places at every fragment of a time period. This can be expressed as a ‘stream’ of object position. The mechanism of an animation can be simplified by somehow mapping every fragment of a time period to a position point in space. In practice, time cannot be fragmented indefinitely, what we want is an approximation of an “atomic time unit”. The browser has provided us a tool to achieve this, which is the requestAnimationFrame API."><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2018-08-02T00:00:00+00:00"><meta property="article:modified_time" content="2018-08-02T00:00:00+00:00"><meta property="article:tag" content="Rxjs"><meta property="article:tag" content="Animation"><meta name=twitter:card content="summary"><meta name=twitter:title content="Parabolic Curve Animation With RxJS"><meta name=twitter:description content="I came across 
 
 
    this article (written in Chinese)
@@ -107,439 +38,94 @@ position. The mechanism of an animation can be simplified by somehow mapping
 every fragment of a time period to a position point in space. In practice, time
 cannot be fragmented indefinitely, what we want is an approximation of an
 &ldquo;atomic time unit&rdquo;. The browser has provided us a tool to achieve this, which is
-the requestAnimationFrame API.">
-
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position":  1 ,
-      "name": "Posts",
-      "item": "https://leihuang.me/posts/"
-    }, 
-    {
-      "@type": "ListItem",
-      "position":  2 ,
-      "name": "Parabolic Curve Animation With RxJS",
-      "item": "https://leihuang.me/posts/curve-animation-in-js/"
-    }
-  ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Parabolic Curve Animation With RxJS",
-  "name": "Parabolic Curve Animation With RxJS",
-  "description": "I came across this article (written in Chinese) the other day. It was about parabolic curve animation in vanilla JS. I wondered how RxJS can implement this. Below is the result of my investigation.\nImagine we take a perspective from a slow-motion camera. What humans see as a smooth animation is just an object that is put at different places at every fragment of a time period. This can be expressed as a \u0026lsquo;stream\u0026rsquo; of object position. The mechanism of an animation can be simplified by somehow mapping every fragment of a time period to a position point in space. In practice, time cannot be fragmented indefinitely, what we want is an approximation of an \u0026ldquo;atomic time unit\u0026rdquo;. The browser has provided us a tool to achieve this, which is the requestAnimationFrame API.\n",
-  "keywords": [
-    "rxjs", "animation"
-  ],
-  "articleBody": "I came across this article (written in Chinese) the other day. It was about parabolic curve animation in vanilla JS. I wondered how RxJS can implement this. Below is the result of my investigation.\nImagine we take a perspective from a slow-motion camera. What humans see as a smooth animation is just an object that is put at different places at every fragment of a time period. This can be expressed as a ‘stream’ of object position. The mechanism of an animation can be simplified by somehow mapping every fragment of a time period to a position point in space. In practice, time cannot be fragmented indefinitely, what we want is an approximation of an “atomic time unit”. The browser has provided us a tool to achieve this, which is the requestAnimationFrame API.\nWe can map every timestamp emitted by requestAnimationFrame to a position coordinate at the screen. Let’s see how we can do this in Rxjs!\nGenerating time sequence // I only demonstrate the import part once, // they will be omitted in later code. import { interval, animationFrameScheduler, fromEvent, defer, merge, } from \"rxjs\"; import { map, takeWhile, tap, flatMap } from \"rxjs/operators\"; function duration(ms) { return defer(() =\u003e { const start = Date.now(); return interval(0, animationFrameScheduler).pipe( map(() =\u003e (Date.now() - start) / ms), takeWhile((n) =\u003e n \u003c= 1) ); }); } What defer does is to only create a new observable upon being subscribed. This is to ensure every subscriber gets a new observable, otherwise, we’ll see weird movements.\nFirst, we record the animation beginning time, then we return an interval function that will emit an event every 0 seconds. This seems ridiculous. However, notice the animationFrameScheduler, it schedules at which point the interval function can emit an event. This is how we simulate an atomic time unit. The map function maps every time unit emitted by interval to a time ratio of current elapse to the whole animation duration. takeWhile ensures we unsubscribe to interval once we reach the end. We know we’ve reached the end if the current elapse equals the total time.\nThen we calculate how far the object is away from the origin at every point in time.\nMove the object const distance = (d) =\u003e (t) =\u003e d * t; d is the total distance the object is going to move. t is the time ratio, which has been calculated in the last step. We multiply them and get the distance at that point.\nWe get the target in the DOM and move it.\nconst targetDiv = document.querySelector(\".target\"); const moveRight$ = duration(1500).pipe( map(distance(1000)), tap((x) =\u003e (targetDiv.style.left = x + \"px\")) ); const moveDown$ = duration(900).pipe( map(distance(700)), tap((y) =\u003e (targetDiv.style.top = y + \"px\")) ); The first stream moves the object to the right, the second to the bottom. Notice that the animation hasn’t taken place, because we haven’t’ subscribed to them yet.\nWe combine these two streams into a new stream, making the object move rightwards and downwards at the same time.\nmerge(moveRight$, moveDown$).subscribe(); This is boring, we don’t see any curve yet. But bear with me.\nMake the motion trajectory parabolic! I hope you still remember middle school math. If you don’t, fret not. It’s pretty intuitive actually. What we observe as a curve movement is the result of an object moves at different speeds in different directions. The shape of the curve can be expressed in a mathematical equation. Take a look of the graph of the equation y = x^3, the left and right half of it is the parabolic curve we want: If we can make the downward speed and rightward speed form a cubic equation, then we have a parabolic curve movement!\nWe can use two different easing functions that form a cubic relationship between them:\nThe first one is easeInQuad：\nconst easeInQuad = (t) =\u003e t * t; The second one is easeInQuint：\nconst easeInQuint = (t) =\u003e Math.pow(t, 6); Then we only need to map the time ratio emitted from the interval pipeline to the result of applying these easing functions:\nconst moveDown$ = duration(900).pipe( map(easeInQuint), map(distance(700)), tap((y) =\u003e (targetDiv.style.top = y + \"px\")) ); const moveRight$ = duration(1500).pipe( map(easeInQuad), map(distance(1000)), tap((x) =\u003e (targetDiv.style.left = x + \"px\")) ); See the codepen below for the result and the complete code:\nSee the Pen{' '} Rx .js parabola animation{' '} by Lei (@leihuang) on{' '} CodePen. ",
-  "wordCount" : "730",
-  "inLanguage": "en",
-  "datePublished": "2018-08-02T00:00:00Z",
-  "dateModified": "2018-08-02T00:00:00Z",
-  "author":{
-    "@type": "Person",
-    "name": "Lei Huang"
-  },
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://leihuang.me/posts/curve-animation-in-js/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "Lei's Blog",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://leihuang.me/favicon.ico"
-    }
-  }
-}
-</script>
-</head>
-
-<body class="" id="top">
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.body.classList.add('dark');
-    } else if (localStorage.getItem("pref-theme") === "light") {
-        document.body.classList.remove('dark')
-    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-    }
-
-</script>
-
-<header class="header">
-    <nav class="nav">
-        <div class="logo">
-            <a href="https://leihuang.me/" accesskey="h" title="Lei&#39;s Blog (Alt + H)">Lei&#39;s Blog</a>
-            <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
-                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <ul id="menu">
-            <li>
-                <a href="https://leihuang.me/archives" title="Archive">
-                    <span>Archive</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://leihuang.me/search/" title="Search (Alt &#43; /)" accesskey=/>
-                    <span>Search</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://leihuang.me/tags/" title="Tags">
-                    <span>Tags</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<main class="main">
-
-<article class="post-single">
-  <header class="post-header">
-    <div class="breadcrumbs"><a href="https://leihuang.me/">Home</a>&nbsp;»&nbsp;<a href="https://leihuang.me/posts/">Posts</a></div>
-    <h1 class="post-title entry-hint-parent">
-      Parabolic Curve Animation With RxJS
-    </h1>
-    <div class="post-meta"><span title='2018-08-02 00:00:00 +0000 UTC'>August 2, 2018</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Lei Huang
-
-</div>
-  </header> 
-  <div class="post-content"><p>I came across 
-
-<a href="https://juejin.im/post/5bb0b7fae51d450e62380ef3" target="_blank" rel="noopener noreferrer">
-   this article (written in Chinese)
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    class="external-icon"
-  >
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-    <polyline points="15 3 21 3 21 9"></polyline>
-    <line x1="10" y1="14" x2="21" y2="3"></line>
-  </svg>
-</a> the other day. It was about parabolic curve animation in vanilla JS. I
+the requestAnimationFrame API."><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Posts","item":"https://leihuang.me/posts/"},{"@type":"ListItem","position":2,"name":"Parabolic Curve Animation With RxJS","item":"https://leihuang.me/posts/curve-animation-in-js/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Parabolic Curve Animation With RxJS","name":"Parabolic Curve Animation With RxJS","description":"I came across this article (written in Chinese) the other day. It was about parabolic curve animation in vanilla JS. I wondered how RxJS can implement this. Below is the result of my investigation.\nImagine we take a perspective from a slow-motion camera. What humans see as a smooth animation is just an object that is put at different places at every fragment of a time period. This can be expressed as a \u0026lsquo;stream\u0026rsquo; of object position. The mechanism of an animation can be simplified by somehow mapping every fragment of a time period to a position point in space. In practice, time cannot be fragmented indefinitely, what we want is an approximation of an \u0026ldquo;atomic time unit\u0026rdquo;. The browser has provided us a tool to achieve this, which is the requestAnimationFrame API.\n","keywords":["rxjs","animation"],"articleBody":"I came across this article (written in Chinese) the other day. It was about parabolic curve animation in vanilla JS. I wondered how RxJS can implement this. Below is the result of my investigation.\nImagine we take a perspective from a slow-motion camera. What humans see as a smooth animation is just an object that is put at different places at every fragment of a time period. This can be expressed as a ‘stream’ of object position. The mechanism of an animation can be simplified by somehow mapping every fragment of a time period to a position point in space. In practice, time cannot be fragmented indefinitely, what we want is an approximation of an “atomic time unit”. The browser has provided us a tool to achieve this, which is the requestAnimationFrame API.\nWe can map every timestamp emitted by requestAnimationFrame to a position coordinate at the screen. Let’s see how we can do this in Rxjs!\nGenerating time sequence // I only demonstrate the import part once, // they will be omitted in later code. import { interval, animationFrameScheduler, fromEvent, defer, merge, } from \"rxjs\"; import { map, takeWhile, tap, flatMap } from \"rxjs/operators\"; function duration(ms) { return defer(() =\u003e { const start = Date.now(); return interval(0, animationFrameScheduler).pipe( map(() =\u003e (Date.now() - start) / ms), takeWhile((n) =\u003e n \u003c= 1) ); }); } What defer does is to only create a new observable upon being subscribed. This is to ensure every subscriber gets a new observable, otherwise, we’ll see weird movements.\nFirst, we record the animation beginning time, then we return an interval function that will emit an event every 0 seconds. This seems ridiculous. However, notice the animationFrameScheduler, it schedules at which point the interval function can emit an event. This is how we simulate an atomic time unit. The map function maps every time unit emitted by interval to a time ratio of current elapse to the whole animation duration. takeWhile ensures we unsubscribe to interval once we reach the end. We know we’ve reached the end if the current elapse equals the total time.\nThen we calculate how far the object is away from the origin at every point in time.\nMove the object const distance = (d) =\u003e (t) =\u003e d * t; d is the total distance the object is going to move. t is the time ratio, which has been calculated in the last step. We multiply them and get the distance at that point.\nWe get the target in the DOM and move it.\nconst targetDiv = document.querySelector(\".target\"); const moveRight$ = duration(1500).pipe( map(distance(1000)), tap((x) =\u003e (targetDiv.style.left = x + \"px\")) ); const moveDown$ = duration(900).pipe( map(distance(700)), tap((y) =\u003e (targetDiv.style.top = y + \"px\")) ); The first stream moves the object to the right, the second to the bottom. Notice that the animation hasn’t taken place, because we haven’t’ subscribed to them yet.\nWe combine these two streams into a new stream, making the object move rightwards and downwards at the same time.\nmerge(moveRight$, moveDown$).subscribe(); This is boring, we don’t see any curve yet. But bear with me.\nMake the motion trajectory parabolic! I hope you still remember middle school math. If you don’t, fret not. It’s pretty intuitive actually. What we observe as a curve movement is the result of an object moves at different speeds in different directions. The shape of the curve can be expressed in a mathematical equation. Take a look of the graph of the equation y = x^3, the left and right half of it is the parabolic curve we want: If we can make the downward speed and rightward speed form a cubic equation, then we have a parabolic curve movement!\nWe can use two different easing functions that form a cubic relationship between them:\nThe first one is easeInQuad：\nconst easeInQuad = (t) =\u003e t * t; The second one is easeInQuint：\nconst easeInQuint = (t) =\u003e Math.pow(t, 6); Then we only need to map the time ratio emitted from the interval pipeline to the result of applying these easing functions:\nconst moveDown$ = duration(900).pipe( map(easeInQuint), map(distance(700)), tap((y) =\u003e (targetDiv.style.top = y + \"px\")) ); const moveRight$ = duration(1500).pipe( map(easeInQuad), map(distance(1000)), tap((x) =\u003e (targetDiv.style.left = x + \"px\")) ); See the codepen below for the result and the complete code:\nSee the Pen{' '} Rx .js parabola animation{' '} by Lei (@leihuang) on{' '} CodePen. ","wordCount":"730","inLanguage":"en","datePublished":"2018-08-02T00:00:00Z","dateModified":"2018-08-02T00:00:00Z","author":{"@type":"Person","name":"Lei Huang"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://leihuang.me/posts/curve-animation-in-js/"},"publisher":{"@type":"Organization","name":"Lei's Blog","logo":{"@type":"ImageObject","url":"https://leihuang.me/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://leihuang.me/ accesskey=h title="Lei's Blog (Alt + H)">Lei's Blog</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme"><svg id="moon" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg><svg id="sun" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://leihuang.me/archives title=Archive><span>Archive</span></a></li><li><a href=https://leihuang.me/search/ title="Search (Alt + /)" accesskey=/><span>Search</span></a></li><li><a href=https://leihuang.me/tags/ title=Tags><span>Tags</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><div class=breadcrumbs><a href=https://leihuang.me/>Home</a>&nbsp;»&nbsp;<a href=https://leihuang.me/posts/>Posts</a></div><h1 class="post-title entry-hint-parent">Parabolic Curve Animation With RxJS</h1><div class=post-meta><span title='2018-08-02 00:00:00 +0000 UTC'>August 2, 2018</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;Lei Huang</div></header><div class=post-content><p>I came across
+<a href=https://juejin.im/post/5bb0b7fae51d450e62380ef3 target=_blank rel="noopener noreferrer">this article (written in Chinese)
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="external-icon"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+</a>the other day. It was about parabolic curve animation in vanilla JS. I
 wondered how RxJS can implement this. Below is the result of my
-investigation.</p>
-<p>Imagine we take a perspective from a slow-motion camera. What humans see as a
+investigation.</p><p>Imagine we take a perspective from a slow-motion camera. What humans see as a
 smooth animation is just an object that is put at different places at every
 fragment of a time period. This can be expressed as a &lsquo;stream&rsquo; of object
 position. The mechanism of an animation can be simplified by somehow mapping
 every fragment of a time period to a position point in space. In practice, time
 cannot be fragmented indefinitely, what we want is an approximation of an
 &ldquo;atomic time unit&rdquo;. The browser has provided us a tool to achieve this, which is
-the <code>requestAnimationFrame</code> API.</p>
-<p>We can map every timestamp emitted by <code>requestAnimationFrame</code> to a position
-coordinate at the screen. Let&rsquo;s see how we can do this in Rxjs!</p>
-<h2 id="generating-time-sequence">Generating time sequence<a hidden class="anchor" aria-hidden="true" href="#generating-time-sequence">#</a></h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// I only demonstrate the import part once,
-</span></span></span><span class="line"><span class="cl"><span class="c1">// they will be omitted in later code.
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">interval</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">animationFrameScheduler</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">fromEvent</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">defer</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">merge</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="nx">from</span> <span class="s2">&#34;rxjs&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">map</span><span class="p">,</span> <span class="nx">takeWhile</span><span class="p">,</span> <span class="nx">tap</span><span class="p">,</span> <span class="nx">flatMap</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&#34;rxjs/operators&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">duration</span><span class="p">(</span><span class="nx">ms</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">defer</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">start</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">interval</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">animationFrameScheduler</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">map</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">-</span> <span class="nx">start</span><span class="p">)</span> <span class="o">/</span> <span class="nx">ms</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">      <span class="nx">takeWhile</span><span class="p">((</span><span class="nx">n</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="p">});</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
+the <code>requestAnimationFrame</code> API.</p><p>We can map every timestamp emitted by <code>requestAnimationFrame</code> to a position
+coordinate at the screen. Let&rsquo;s see how we can do this in Rxjs!</p><h2 id=generating-time-sequence>Generating time sequence<a hidden class=anchor aria-hidden=true href=#generating-time-sequence>#</a></h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=c1>// I only demonstrate the import part once,
+</span></span></span><span class=line><span class=cl><span class=c1>// they will be omitted in later code.
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kr>import</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nx>interval</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>animationFrameScheduler</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>fromEvent</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>defer</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nx>merge</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>}</span> <span class=nx>from</span> <span class=s2>&#34;rxjs&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=kr>import</span> <span class=p>{</span> <span class=nx>map</span><span class=p>,</span> <span class=nx>takeWhile</span><span class=p>,</span> <span class=nx>tap</span><span class=p>,</span> <span class=nx>flatMap</span> <span class=p>}</span> <span class=nx>from</span> <span class=s2>&#34;rxjs/operators&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>function</span> <span class=nx>duration</span><span class=p>(</span><span class=nx>ms</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nx>defer</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kr>const</span> <span class=nx>start</span> <span class=o>=</span> <span class=nb>Date</span><span class=p>.</span><span class=nx>now</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nx>interval</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=nx>animationFrameScheduler</span><span class=p>).</span><span class=nx>pipe</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>      <span class=nx>map</span><span class=p>(()</span> <span class=p>=&gt;</span> <span class=p>(</span><span class=nb>Date</span><span class=p>.</span><span class=nx>now</span><span class=p>()</span> <span class=o>-</span> <span class=nx>start</span><span class=p>)</span> <span class=o>/</span> <span class=nx>ms</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>      <span class=nx>takeWhile</span><span class=p>((</span><span class=nx>n</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>n</span> <span class=o>&lt;=</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>});</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></div><p>What <code>defer</code> does is to only create a new observable upon being subscribed. This
 is to ensure every subscriber gets a new observable, otherwise, we&rsquo;ll see weird
-movements.</p>
-<p>First, we record the animation beginning time, then we return an interval
+movements.</p><p>First, we record the animation beginning time, then we return an interval
 function that will emit an event every 0 seconds. This seems ridiculous.
 However, notice the <code>animationFrameScheduler</code>, it schedules at which point the
 <code>interval</code> function can emit an event. This is how we simulate an atomic time
 unit. The <code>map</code> function maps every time unit emitted by <code>interval</code> to a time
 ratio of current elapse to the whole animation duration. <code>takeWhile</code> ensures we
 unsubscribe to <code>interval</code> once we reach the end. We know we&rsquo;ve reached the end
-if the current elapse equals the total time.</p>
-<p>Then we calculate how far the object is away from the origin at every point in
-time.</p>
-<h2 id="move-the-object">Move the object<a hidden class="anchor" aria-hidden="true" href="#move-the-object">#</a></h2>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">distance</span> <span class="o">=</span> <span class="p">(</span><span class="nx">d</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">d</span> <span class="o">*</span> <span class="nx">t</span><span class="p">;</span>
+if the current elapse equals the total time.</p><p>Then we calculate how far the object is away from the origin at every point in
+time.</p><h2 id=move-the-object>Move the object<a hidden class=anchor aria-hidden=true href=#move-the-object>#</a></h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kr>const</span> <span class=nx>distance</span> <span class=o>=</span> <span class=p>(</span><span class=nx>d</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>(</span><span class=nx>t</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>d</span> <span class=o>*</span> <span class=nx>t</span><span class=p>;</span>
 </span></span></code></pre></div><p><code>d</code> is the total distance the object is going to move. <code>t</code> is the time ratio,
 which has been calculated in the last step. We multiply them and get the
-distance at that point.</p>
-<p>We get the target in the DOM and move it.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">targetDiv</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s2">&#34;.target&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">moveRight$</span> <span class="o">=</span> <span class="nx">duration</span><span class="p">(</span><span class="mi">1500</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">map</span><span class="p">(</span><span class="nx">distance</span><span class="p">(</span><span class="mi">1000</span><span class="p">)),</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">tap</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="nx">targetDiv</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">+</span> <span class="s2">&#34;px&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">moveDown$</span> <span class="o">=</span> <span class="nx">duration</span><span class="p">(</span><span class="mi">900</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">map</span><span class="p">(</span><span class="nx">distance</span><span class="p">(</span><span class="mi">700</span><span class="p">)),</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">tap</span><span class="p">((</span><span class="nx">y</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="nx">targetDiv</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nx">y</span> <span class="o">+</span> <span class="s2">&#34;px&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="p">);</span>
+distance at that point.</p><p>We get the target in the DOM and move it.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kr>const</span> <span class=nx>targetDiv</span> <span class=o>=</span> <span class=nb>document</span><span class=p>.</span><span class=nx>querySelector</span><span class=p>(</span><span class=s2>&#34;.target&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>moveRight$</span> <span class=o>=</span> <span class=nx>duration</span><span class=p>(</span><span class=mi>1500</span><span class=p>).</span><span class=nx>pipe</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=nx>map</span><span class=p>(</span><span class=nx>distance</span><span class=p>(</span><span class=mi>1000</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>  <span class=nx>tap</span><span class=p>((</span><span class=nx>x</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>(</span><span class=nx>targetDiv</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>left</span> <span class=o>=</span> <span class=nx>x</span> <span class=o>+</span> <span class=s2>&#34;px&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>moveDown$</span> <span class=o>=</span> <span class=nx>duration</span><span class=p>(</span><span class=mi>900</span><span class=p>).</span><span class=nx>pipe</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=nx>map</span><span class=p>(</span><span class=nx>distance</span><span class=p>(</span><span class=mi>700</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>  <span class=nx>tap</span><span class=p>((</span><span class=nx>y</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>(</span><span class=nx>targetDiv</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>top</span> <span class=o>=</span> <span class=nx>y</span> <span class=o>+</span> <span class=s2>&#34;px&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>);</span>
 </span></span></code></pre></div><p>The first stream moves the object to the right, the second to the bottom. Notice
 that the animation hasn&rsquo;t taken place, because we haven&rsquo;t&rsquo; subscribed to them
-yet.</p>
-<p>We combine these two streams into a new stream, making the object move
-rightwards and downwards at the same time.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">merge</span><span class="p">(</span><span class="nx">moveRight$</span><span class="p">,</span> <span class="nx">moveDown$</span><span class="p">).</span><span class="nx">subscribe</span><span class="p">();</span>
-</span></span></code></pre></div><p>This is boring, we don&rsquo;t see any curve yet. But bear with me.</p>
-<h2 id="make-the-motion-trajectory-parabolic">Make the motion trajectory parabolic!<a hidden class="anchor" aria-hidden="true" href="#make-the-motion-trajectory-parabolic">#</a></h2>
-<p>I hope you still remember middle school math. If you don&rsquo;t, fret not. It&rsquo;s
+yet.</p><p>We combine these two streams into a new stream, making the object move
+rightwards and downwards at the same time.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=nx>merge</span><span class=p>(</span><span class=nx>moveRight$</span><span class=p>,</span> <span class=nx>moveDown$</span><span class=p>).</span><span class=nx>subscribe</span><span class=p>();</span>
+</span></span></code></pre></div><p>This is boring, we don&rsquo;t see any curve yet. But bear with me.</p><h2 id=make-the-motion-trajectory-parabolic>Make the motion trajectory parabolic!<a hidden class=anchor aria-hidden=true href=#make-the-motion-trajectory-parabolic>#</a></h2><p>I hope you still remember middle school math. If you don&rsquo;t, fret not. It&rsquo;s
 pretty intuitive actually. What we observe as a curve movement is the result of
 an object moves at different speeds in different directions. The shape of the
 curve can be expressed in a mathematical equation. Take a look of the graph of
 the equation y = x^3, the left and right half of it is the parabolic curve we
 want:
-<img alt="cubic formula" loading="lazy" src="/images/cubic-formula.png"></p>
-<p>If we can make the downward speed and rightward speed form a cubic equation,
-then we have a parabolic curve movement!</p>
-<p>We can use two different easing functions that form a cubic relationship between
-them:</p>
-<p>The first one is <code>easeInQuad</code>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">easeInQuad</span> <span class="o">=</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">t</span> <span class="o">*</span> <span class="nx">t</span><span class="p">;</span>
-</span></span></code></pre></div><p>The second one is <code>easeInQuint</code>：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">easeInQuint</span> <span class="o">=</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>
+<img alt="cubic formula" loading=lazy src=/images/cubic-formula.png></p><p>If we can make the downward speed and rightward speed form a cubic equation,
+then we have a parabolic curve movement!</p><p>We can use two different easing functions that form a cubic relationship between
+them:</p><p>The first one is <code>easeInQuad</code>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kr>const</span> <span class=nx>easeInQuad</span> <span class=o>=</span> <span class=p>(</span><span class=nx>t</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nx>t</span> <span class=o>*</span> <span class=nx>t</span><span class=p>;</span>
+</span></span></code></pre></div><p>The second one is <code>easeInQuint</code>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=line><span class=cl><span class=kr>const</span> <span class=nx>easeInQuint</span> <span class=o>=</span> <span class=p>(</span><span class=nx>t</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=nb>Math</span><span class=p>.</span><span class=nx>pow</span><span class=p>(</span><span class=nx>t</span><span class=p>,</span> <span class=mi>6</span><span class=p>);</span>
 </span></span></code></pre></div><p>Then we only need to map the time ratio emitted from the interval pipeline to
-the result of applying these easing functions:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">moveDown$</span> <span class="o">=</span> <span class="nx">duration</span><span class="p">(</span><span class="mi">900</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">map</span><span class="p">(</span><span class="nx">easeInQuint</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">map</span><span class="p">(</span><span class="nx">distance</span><span class="p">(</span><span class="mi">700</span><span class="p">)),</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">tap</span><span class="p">((</span><span class="nx">y</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="nx">targetDiv</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nx">y</span> <span class="o">+</span> <span class="s2">&#34;px&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">moveRight$</span> <span class="o">=</span> <span class="nx">duration</span><span class="p">(</span><span class="mi">1500</span><span class="p">).</span><span class="nx">pipe</span><span class="p">(</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">map</span><span class="p">(</span><span class="nx">easeInQuad</span><span class="p">),</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">map</span><span class="p">(</span><span class="nx">distance</span><span class="p">(</span><span class="mi">1000</span><span class="p">)),</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">tap</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">(</span><span class="nx">targetDiv</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">+</span> <span class="s2">&#34;px&#34;</span><span class="p">))</span>
-</span></span><span class="line"><span class="cl"><span class="p">);</span>
-</span></span></code></pre></div><p>See the codepen below for the result and the complete code:</p>
-<iframe
-  height="300"
-  style="width: 100%"
-  scrolling="no"
-  title="Rx .js parabola animation"
-  src="https://codepen.io/leihuang/embed/OBVBjb?default-tab=html%2Cresult"
-  frameBorder="no"
-  loading="lazy"
-  allowtransparency="true"
-  allowFullScreen="true"
->
-  See the Pen{' '}
-  <a href="https://codepen.io/leihuang/pen/OBVBjb">Rx .js parabola animation</a>{' '}
-  by Lei (<a href="https://codepen.io/leihuang">@leihuang</a>) on{' '}
-  <a href="https://codepen.io">CodePen</a>.
-</iframe>
-
-
-  </div>
-
-  <footer class="post-footer">
-    <ul class="post-tags">
-      <li><a href="https://leihuang.me/tags/rxjs/">Rxjs</a></li>
-      <li><a href="https://leihuang.me/tags/animation/">Animation</a></li>
-    </ul>
-<nav class="paginav">
-  <a class="prev" href="https://leihuang.me/posts/lens-in-js/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>Introduction to Lenses in JavaScript</span>
-  </a>
-</nav>
-
-
-<ul class="share-buttons">
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Parabolic Curve Animation With RxJS on linkedin"
-            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fleihuang.me%2fposts%2fcurve-animation-in-js%2f&amp;title=Parabolic%20Curve%20Animation%20With%20RxJS&amp;summary=Parabolic%20Curve%20Animation%20With%20RxJS&amp;source=https%3a%2f%2fleihuang.me%2fposts%2fcurve-animation-in-js%2f">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Parabolic Curve Animation With RxJS on reddit"
-            href="https://reddit.com/submit?url=https%3a%2f%2fleihuang.me%2fposts%2fcurve-animation-in-js%2f&title=Parabolic%20Curve%20Animation%20With%20RxJS">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
-            </svg>
-        </a>
-    </li>
-    <li>
-        <a target="_blank" rel="noopener noreferrer" aria-label="share Parabolic Curve Animation With RxJS on whatsapp"
-            href="https://api.whatsapp.com/send?text=Parabolic%20Curve%20Animation%20With%20RxJS%20-%20https%3a%2f%2fleihuang.me%2fposts%2fcurve-animation-in-js%2f">
-            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
-                <path
-                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
-            </svg>
-        </a>
-    </li>
-</ul>
-
-  </footer>
-</article>
-    </main>
-    
-<footer class="footer">
-        <span>© 2025 Lei Huang</span> · 
-
-    <span>
-        Powered by
-        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
-        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
-    </span>
-</footer>
-<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
-        <path d="M12 6H0l6-6z" />
-    </svg>
-</a>
-
-<script>
-    let menu = document.getElementById('menu')
-    if (menu) {
-        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
-        menu.onscroll = function () {
-            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
-        }
-    }
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener("click", function (e) {
-            e.preventDefault();
-            var id = this.getAttribute("href").substr(1);
-            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
-                    behavior: "smooth"
-                });
-            } else {
-                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
-            }
-            if (id === "top") {
-                history.replaceState(null, null, " ");
-            } else {
-                history.pushState(null, null, `#${id}`);
-            }
-        });
-    });
-
-</script>
-<script>
-    var mybutton = document.getElementById("top-link");
-    window.onscroll = function () {
-        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
-            mybutton.style.visibility = "visible";
-            mybutton.style.opacity = "1";
-        } else {
-            mybutton.style.visibility = "hidden";
-            mybutton.style.opacity = "0";
-        }
-    };
-
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.className.includes("dark")) {
-            document.body.classList.remove('dark');
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            document.body.classList.add('dark');
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
-
-</script>
-<script>
-    document.querySelectorAll('pre > code').forEach((codeblock) => {
-        const container = codeblock.parentNode.parentNode;
-
-        const copybutton = document.createElement('button');
-        copybutton.classList.add('copy-code');
-        copybutton.innerHTML = 'copy';
-
-        function copyingDone() {
-            copybutton.innerHTML = 'copied!';
-            setTimeout(() => {
-                copybutton.innerHTML = 'copy';
-            }, 2000);
-        }
-
-        copybutton.addEventListener('click', (cb) => {
-            if ('clipboard' in navigator) {
-                navigator.clipboard.writeText(codeblock.textContent);
-                copyingDone();
-                return;
-            }
-
-            const range = document.createRange();
-            range.selectNodeContents(codeblock);
-            const selection = window.getSelection();
-            selection.removeAllRanges();
-            selection.addRange(range);
-            try {
-                document.execCommand('copy');
-                copyingDone();
-            } catch (e) { };
-            selection.removeRange(range);
-        });
-
-        if (container.classList.contains("highlight")) {
-            container.appendChild(copybutton);
-        } else if (container.parentNode.firstChild == container) {
-            
-        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
-            
-            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
-        } else {
-            
-            codeblock.parentNode.appendChild(copybutton);
-        }
-    });
-</script>
-</body>
-
-</html>
+the result of applying these easing functions:</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-javascript data-lang=javascript><span class=line><span class=cl><span class=kr>const</span> <span class=nx>moveDown$</span> <span class=o>=</span> <span class=nx>duration</span><span class=p>(</span><span class=mi>900</span><span class=p>).</span><span class=nx>pipe</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=nx>map</span><span class=p>(</span><span class=nx>easeInQuint</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=nx>map</span><span class=p>(</span><span class=nx>distance</span><span class=p>(</span><span class=mi>700</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>  <span class=nx>tap</span><span class=p>((</span><span class=nx>y</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>(</span><span class=nx>targetDiv</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>top</span> <span class=o>=</span> <span class=nx>y</span> <span class=o>+</span> <span class=s2>&#34;px&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kr>const</span> <span class=nx>moveRight$</span> <span class=o>=</span> <span class=nx>duration</span><span class=p>(</span><span class=mi>1500</span><span class=p>).</span><span class=nx>pipe</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>  <span class=nx>map</span><span class=p>(</span><span class=nx>easeInQuad</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=nx>map</span><span class=p>(</span><span class=nx>distance</span><span class=p>(</span><span class=mi>1000</span><span class=p>)),</span>
+</span></span><span class=line><span class=cl>  <span class=nx>tap</span><span class=p>((</span><span class=nx>x</span><span class=p>)</span> <span class=p>=&gt;</span> <span class=p>(</span><span class=nx>targetDiv</span><span class=p>.</span><span class=nx>style</span><span class=p>.</span><span class=nx>left</span> <span class=o>=</span> <span class=nx>x</span> <span class=o>+</span> <span class=s2>&#34;px&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>);</span>
+</span></span></code></pre></div><p>See the codepen below for the result and the complete code:</p><iframe height=300 style=width:100% scrolling=no title="Rx .js parabola animation" src="https://codepen.io/leihuang/embed/OBVBjb?default-tab=html%2Cresult" frameborder=no loading=lazy allowtransparency=true allowfullscreen>See the Pen{' '}
+<a href=https://codepen.io/leihuang/pen/OBVBjb>Rx .js parabola animation</a>{' '}
+by Lei (<a href=https://codepen.io/leihuang>@leihuang</a>) on{' '}
+<a href=https://codepen.io>CodePen</a>.</iframe></div><footer class=post-footer><ul class=post-tags><li><a href=https://leihuang.me/tags/rxjs/>Rxjs</a></li><li><a href=https://leihuang.me/tags/animation/>Animation</a></li></ul><nav class=paginav><a class=prev href=https://leihuang.me/posts/lens-in-js/><span class=title>« Prev</span><br><span>Introduction to Lenses in JavaScript</span></a></nav><ul class=share-buttons><li><a target=_blank rel="noopener noreferrer" aria-label="share Parabolic Curve Animation With RxJS on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fleihuang.me%2fposts%2fcurve-animation-in-js%2f&amp;title=Parabolic%20Curve%20Animation%20With%20RxJS&amp;summary=Parabolic%20Curve%20Animation%20With%20RxJS&amp;source=https%3a%2f%2fleihuang.me%2fposts%2fcurve-animation-in-js%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentcolor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Parabolic Curve Animation With RxJS on reddit" href="https://reddit.com/submit?url=https%3a%2f%2fleihuang.me%2fposts%2fcurve-animation-in-js%2f&title=Parabolic%20Curve%20Animation%20With%20RxJS"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentcolor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share Parabolic Curve Animation With RxJS on whatsapp" href="https://api.whatsapp.com/send?text=Parabolic%20Curve%20Animation%20With%20RxJS%20-%20https%3a%2f%2fleihuang.me%2fposts%2fcurve-animation-in-js%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentcolor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg></a></li></ul></footer></article></main><footer class=footer><span>© 2025 Lei Huang</span> ·
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+        <a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><svg viewBox="0 0 12 6" fill="currentcolor"><path d="M12 6H0l6-6z"/></svg>
+</a><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="copy";function s(){t.innerHTML="copied!",setTimeout(()=>{t.innerHTML="copy"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
