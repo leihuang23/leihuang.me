@@ -7,8 +7,16 @@
     <generator>Hugo -- 0.145.0</generator>
     <language>en</language>
     <copyright>2025 Lei Huang</copyright>
-    <lastBuildDate>Sun, 30 Mar 2025 15:11:05 +0200</lastBuildDate>
+    <lastBuildDate>Fri, 18 Apr 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="https://leihuang.me/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>AI Has No Understanding</title>
+      <link>https://leihuang.me/posts/ai-has-no-understanding/</link>
+      <pubDate>Fri, 18 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>https://leihuang.me/posts/ai-has-no-understanding/</guid>
+      <description>&lt;p&gt;The proliferation of AI (specifically LLMs) has been the major development in our industry recently. Many people are understandably impressed by the capabilities of cutting-edge LLMs. However, the hype sometimes becomes ridiculous. On Twitter, I&amp;rsquo;ve seen people claiming AGI is already here because some LLMs are capable of solving very advanced coding challenges.&lt;/p&gt;
+&lt;p&gt;I&amp;rsquo;ve been using LLMs at work for quite a while. Although it&amp;rsquo;s not rare for me to use them to generate code beyond my expertise, I remain convinced that current LLMs lack genuine cognitive capabilities. The notion of fully delegating human tasks to AI systems remains unrealistic today. I doubt whether it will ever be truly possible.&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Learn Batching From LLM</title>
       <link>https://leihuang.me/posts/learn-batching-from-llm/</link>
